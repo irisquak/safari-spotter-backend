@@ -1,0 +1,27 @@
+// server.js
+
+const express = require('express');  // Importeer Express (webframework)
+const { addSighting, getSightings } = require('./sightings');  // Importeer functies van sightings.js
+
+const app = express(); // Maak een nieuwe Express applicatie
+const port = process.env.PORT || 3000;  // Gebruik de poort van het systeem, of anders 3000
+
+// Middleware om JSON data te kunnen ontvangen
+app.use(express.json());
+
+// Endpoint om alle sightings (waarnemingen) op te halen
+app.get('/sightings', (req, res) => {
+  res.json(getSightings());  // Haal alle waarnemingen op
+});
+
+// Endpoint om een nieuwe sighting (waarneming) toe te voegen
+app.post('/sightings', (req, res) => {
+  const { animal, location, date } = req.body;  // Haal de gegevens uit het request
+  addSighting(animal, location, date);  // Voeg de waarneming toe
+  res.status(201).json({ message: 'Sighting added successfully!' });  // Bevestiging sturen
+});
+
+// Start de server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
