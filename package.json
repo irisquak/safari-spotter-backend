@@ -17,5 +17,8 @@
     "url": "https://github.com/irisquak/safari-spotter-backend/issues"
   },
   "homepage": "https://github.com/irisquak/safari-spotter-backend#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
